@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit.M — Content Creator & Digital Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --bg: #f8f7ff;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --pink: #ec4899;
+    --blue: #3b82f6;
+    --blue-light: #93c5fd;
+    --dark: #1a1a2e;
+    --grey: #4b5563;
+    --grey-light: #9ca3af;
+    --card-bg: rgba(255,255,255,0.85);
+    --gradient: linear-gradient(135deg, #7c3aed, #3b82f6, #ec4899);
+    --gradient-soft: linear-gradient(135deg, #ede9fe, #dbeafe, #fce7f3);
+    --shadow: 0 8px 32px rgba(124,58,237,0.12);
+    --shadow-hover: 0 16px 48px rgba(124,58,237,0.22);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(16px);
+    background: rgba(248,247,255,0.85);
+    border-bottom: 1px solid rgba(124,58,237,0.08);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 24px rgba(124,58,237,0.1); }
+
+  .nav-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--grey);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--purple); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    padding: 0.55rem 1.4rem;
+    background: var(--gradient);
+    color: white !important;
+    border-radius: 50px;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+    -webkit-text-fill-color: white !important;
+  }
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.4) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 5% 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .blob1 { width: 500px; height: 500px; background: #a78bfa; top: -100px; right: -100px; }
+  .blob2 { width: 400px; height: 400px; background: #60a5fa; bottom: 50px; left: -80px; }
+  .blob3 { width: 300px; height: 300px; background: #f472b6; top: 40%; right: 10%; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gradient-soft);
+    border: 1px solid rgba(124,58,237,0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag span { width: 7px; height: 7px; background: var(--purple); border-radius: 50%; animation: pulse 1.5s infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+  .hero-title .highlight {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--purple-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--grey);
+    max-width: 480px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 6px 24px rgba(124,58,237,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(124,58,237,0.45); }
+
+  .btn-secondary {
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--purple);
+    border: 2px solid var(--purple-light);
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--gradient-soft); border-color: var(--purple); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .hero-card {
+    width: 340px;
+    height: 420px;
+    background: var(--card-bg);
+    border-radius: 32px;
+    box-shadow: var(--shadow-hover);
+    border: 1px solid rgba(124,58,237,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gradient);
+  }
+
+  .avatar-ring {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--gradient);
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(124,58,237,0.3);
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ede9fe 0%, #dbeafe 50%, #fce7f3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+  }
+
+  .hero-card-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--dark);
+    text-align: center;
+  }
+
+  .hero-card-role {
+    font-size: 0.85rem;
+    color: var(--grey);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--grey-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .floating-badge {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 0.6rem 1rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .badge-1 { top: 20px; right: -20px; animation-delay: 0.5s; color: var(--purple); }
+  .badge-2 { bottom: 50px; left: -25px; animation-delay: 1s; color: var(--pink); }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 6rem 5%; position: relative; z-index: 1; }
+
+  .section-label {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--purple);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-title .hl {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--grey);
+    max-width: 500px;
+    margin-bottom: 3rem;
+  }
+
+  .center-text { text-align: center; }
+  .center-text .section-sub { margin-left: auto; margin-right: auto; }
+
+  /* ─── ABOUT ─── */
+  #about { background: white; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card-main {
+    background: var(--gradient-soft);
+    border: 1px solid rgba(124,58,237,0.15);
+    border-radius: 24px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .about-emoji { font-size: 4rem; margin-bottom: 1rem; display: block; }
+
+  .about-quote {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--purple);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .about-pill {
+    display: inline-block;
+    background: var(--gradient);
+    color: white;
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 1.2rem;
+  }
+
+  .about-floating {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border: 1px solid rgba(124,58,237,0.1);
+  }
+  .af1 { top: -20px; right: -15px; color: var(--purple); animation: float 3.5s ease-in-out infinite; }
+  .af2 { bottom: -15px; left: -10px; color: var(--pink); animation: float 4s ease-in-out infinite 1s; }
+
+  .about-text p {
+    font-size: 1rem;
+    color: var(--grey);
+    margin-bottom: 1.2rem;
+    line-height: 1.8;
+  }
+
+  .about-values {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .value-chip {
+    padding: 0.5rem 1.2rem;
+    background: var(--gradient-soft);
+    border: 1px solid rgba(124,58,237,0.18);
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--purple);
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s;
+  }
+  .value-chip:hover { background: var(--gradient); color: white; border-color: transparent; transform: translateY(-2px); }
+
+  /* ─── SKILLS ─── */
+  #skills { background: var(--bg); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .skill-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(124,58,237,0.1);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+  }
+
+  .skill-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--purple-light); }
+  .skill-card:hover::before { opacity: 0.05; }
+
+  .skill-card > * { position: relative; z-index: 1; }
+
+  .skill-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .skill-card:hover .skill-icon { transform: scale(1.15) rotate(-5deg); }
+
+  .skill-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-bar-wrap { background: #e5e7eb; border-radius: 50px; height: 4px; margin-top: 0.8rem; overflow: hidden; }
+  .skill-bar {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 50px;
+    width: 0;
+    transition: width 1.5s ease;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: white; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 2.2rem 2rem;
+    border: 1px solid rgba(124,58,237,0.1);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-icon { font-size: 2.2rem; margin-bottom: 1.2rem; display: block; }
+
+  .service-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .service-tag {
+    font-size: 0.82rem;
+    color: var(--purple);
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .service-desc { font-size: 0.88rem; color: var(--grey); line-height: 1.6; }
+
+  /* ─── EXPERIENCE ─── */
+  #experience { background: var(--bg); }
+
+  .exp-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .exp-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(124,58,237,0.1);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .exp-item.visible { opacity: 1; transform: translateX(0); }
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-dot {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 14px;
+    background: var(--gradient-soft);
+    border: 1px solid rgba(124,58,237,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: all 0.3s;
+  }
+  .exp-item:hover .exp-dot { background: var(--gradient); transform: rotate(10deg); }
+
+  .exp-text h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-text p { font-size: 0.88rem; color: var(--grey); line-height: 1.6; }
+
+  /* ─── TARGET CLIENTS ─── */
+  #clients { background: white; }
+
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .client-card {
+    background: var(--gradient-soft);
+    border: 1px solid rgba(124,58,237,0.12);
+    border-radius: var(--radius);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .client-card:hover {
+    background: var(--gradient);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .client-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; transition: transform 0.3s; }
+  .client-card:hover .client-icon { transform: scale(1.2); }
+
+  .client-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--dark);
+    transition: color 0.3s;
+  }
+  .client-card:hover .client-label { color: white; }
+
+  .client-sub { font-size: 0.8rem; color: var(--grey); margin-top: 0.3rem; transition: color 0.3s; }
+  .client-card:hover .client-sub { color: rgba(255,255,255,0.85); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--dark);
+    overflow: hidden;
+    position: relative;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #contact::after {
+    content: '';
+    position: absolute;
+    bottom: -200px; left: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-inner .section-title { color: white; }
+  .contact-inner .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 2.5rem; }
+
+  .contact-cta-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+  .contact-cta-text span {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .contact-link.instagram {
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    box-shadow: 0 6px 24px rgba(220,39,67,0.35);
+  }
+  .contact-link.instagram:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(220,39,67,0.45); }
+
+  .contact-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 2rem 0;
+  }
+
+  .contact-footer {
+    color: rgba(255,255,255,0.35);
+    font-size: 0.82rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0f0f1a;
+    padding: 1.5rem 5%;
+    text-align: center;
+    color: rgba(255,255,255,0.25);
+    font-size: 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+  }
+  footer span { color: var(--purple-light); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px) } to { opacity:1; transform:translateY(0) } }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+  /* ─── TYPING CURSOR ─── */
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--purple);
+    margin-left: 3px;
+    vertical-align: text-bottom;
+    animation: blink 0.8s step-end infinite;
+    border-radius: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* ─── MARQUEE ─── */
+  .marquee-section {
+    background: var(--gradient);
+    padding: 1.2rem 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .marquee-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-visual { order: -1; }
+    .hero-card { width: 280px; height: 340px; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .nav-links { display: none; }
+    .floating-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="nav-logo">Mohit.M</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag"><span></span> Available for collaborations</div>
+      <div class="hero-sub">Content Creator · Digital Strategist · Growth Driven Mindset</div>
+      <h1 class="hero-title">
+        I Don't Just Create Content,<br>I Build <span class="highlight" id="typed-text">Digital Presence</span><span class="cursor"></span>
+      </h1>
+      <p class="hero-desc">I help creators and brands grow through engaging content, smart strategies, and audience understanding.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">✨ Work With Me</a>
+        <a href="#services" class="btn-secondary">See My Services</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="avatar-ring">
+          <div class="avatar-inner">🎯</div>
+        </div>
+        <div class="hero-card-name">Mohit.M</div>
+        <div class="hero-card-role">Psychology & Sociology Student<br>Content Creator & Strategist</div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Dedicated</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Creative</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">↑</div>
+            <div class="stat-label">Growth</div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge badge-1">🚀 Growth Mindset</div>
+      <div class="floating-badge badge-2">💜 Strategy First</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Content Creation <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Instagram Strategy <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Reels & Short-Form <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Audience Psychology <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Brand Building <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Digital Growth <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Content Creation <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Instagram Strategy <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Reels & Short-Form <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Audience Psychology <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Brand Building <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Digital Growth <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-card-main">
+        <span class="about-emoji">🧠</span>
+        <div class="about-quote">"Content isn't just posting — it's connecting, influencing, and growing consistently."</div>
+        <span class="about-pill">— Mohit's Philosophy</span>
+      </div>
+      <div class="about-floating af1">📚 Psych & Sociology Student</div>
+      <div class="about-floating af2">🎨 Creative Thinker</div>
+    </div>
+
+    <div class="about-text reveal">
+      <span class="section-label">Who Am I?</span>
+      <h2 class="section-title">The Mind Behind<br>the <span class="hl">Content</span></h2>
+      <p>Hi, I'm Mohit — a Psychology & Sociology student and Content Creator who builds engaging content and strong digital presence through creativity, research, and audience understanding.</p>
+      <p>I believe content is not just about posting — it's about connecting, influencing, and growing consistently. My goal is to help individuals and brands stand out in the digital world with smart strategies and impactful content.</p>
+      <div class="about-values">
+        <span class="value-chip">🎯 Strategy-First</span>
+        <span class="value-chip">🧠 Psychology-Driven</span>
+        <span class="value-chip">📈 Growth-Focused</span>
+        <span class="value-chip">✨ Creative Thinker</span>
+        <span class="value-chip">🔄 Consistent</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="center-text reveal">
+    <span class="section-label">What I Bring</span>
+    <h2 class="section-title">My <span class="hl">Skill Set</span></h2>
+    <p class="section-sub">A blend of creative thinking, strategic planning, and deep audience understanding.</p>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <span class="skill-icon">✍️</span>
+      <div class="skill-name">Content Writing</div>
+      <p style="font-size:0.82rem;color:var(--grey)">Crafting words that resonate and drive engagement</p>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="85%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">📱</span>
+      <div class="skill-name">Instagram Management</div>
+      <p style="font-size:0.82rem;color:var(--grey)">Running accounts with strategy and consistency</p>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="80%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🎬</span>
+      <div class="skill-name">Reels & Content Strategy</div>
+      <p style="font-size:0.82rem;color:var(--grey)">Short-form video concepts that stop the scroll</p>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="78%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-name">Basic SEO & Research</div>
+      <p style="font-size:0.82rem;color:var(--grey)">Optimizing discoverability with smart keywords</p>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="70%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🧠</span>
+      <div class="skill-name">Audience Psychology</div>
+      <p style="font-size:0.82rem;color:var(--grey)">Understanding what makes people stop and engage</p>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-width="90%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="center-text reveal">
+    <span class="section-label">What I Offer</span>
+    <h2 class="section-title">Services Built for <span class="hl">Real Growth</span></h2>
+    <p class="section-sub">Every service is designed to make your digital presence impossible to ignore.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">📲</span>
+      <div class="service-title">Instagram Account Handling</div>
+      <span class="service-tag">"Your page, my strategy"</span>
+      <p class="service-desc">Full management — from content planning and scheduling to engagement and growth tracking.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">📝</span>
+      <div class="service-title">Content Writing</div>
+      <span class="service-tag">"Words that connect and convert"</span>
+      <p class="service-desc">Captions, scripts, bios, and posts written with intention and psychological precision.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🎥</span>
+      <div class="service-title">Reels Strategy</div>
+      <span class="service-tag">"Content that stops scrolling"</span>
+      <p class="service-desc">Ideation, scripting, and strategy for short-form videos designed to reach and retain audiences.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">📊</span>
+      <div class="service-title">Growth Strategy</div>
+      <span class="service-tag">"Build attention and scale"</span>
+      <p class="service-desc">Data-informed strategy sessions to define your niche, voice, and audience growth path.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience" style="background:var(--bg)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="reveal">
+      <span class="section-label">My Journey</span>
+      <h2 class="section-title">Growing Every <span class="hl">Single Day</span></h2>
+      <p class="section-sub" style="margin-bottom:3rem">Every step is progress. Here's what I've been building.</p>
+    </div>
+
+    <div class="exp-container">
+      <div class="exp-item">
+        <div class="exp-dot">📸</div>
+        <div class="exp-text">
+          <h4>Engaging Instagram Content Creation</h4>
+          <p>Produced and managed original content with a focus on visual storytelling, audience hooks, and consistent brand voice that builds community over time.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot">🧠</div>
+        <div class="exp-text">
+          <h4>Deep Understanding of Audience Behavior</h4>
+          <p>Applied psychology and sociology knowledge to decode what drives engagement, loyalty, and growth in digital audiences — a unique edge in content creation.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot">🎯</div>
+        <div class="exp-text">
+          <h4>Consistency & Growth Mindset in Practice</h4>
+          <p>Built a disciplined content habit — showing up, iterating, and improving with each post. Consistency is the real strategy that compounds over time.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot">📚</div>
+        <div class="exp-text">
+          <h4>Continuously Learning & Evolving</h4>
+          <p>Always studying trends, platform shifts, and algorithm changes to stay ahead — turning new knowledge into smarter, fresher strategies every week.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TARGET CLIENTS ── -->
+<section id="clients">
+  <div class="center-text reveal">
+    <span class="section-label">Ideal Partners</span>
+    <h2 class="section-title">Who I <span class="hl">Work With</span></h2>
+    <p class="section-sub">If you want to grow online with intention and strategy, we're a fit.</p>
+  </div>
+
+  <div class="clients-grid">
+    <div class="client-card reveal">
+      <span class="client-icon">🎤</span>
+      <div class="client-label">Creators</div>
+      <div class="client-sub">Building a unique voice online</div>
+    </div>
+    <div class="client-card reveal">
+      <span class="client-icon">👤</span>
+      <div class="client-label">Personal Brands</div>
+      <div class="client-sub">Establishing authority & presence</div>
+    </div>
+    <div class="client-card reveal">
+      <span class="client-icon">🏪</span>
+      <div class="client-label">Small Businesses</div>
+      <div class="client-sub">Growing through content & trust</div>
+    </div>
+    <div class="client-card reveal">
+      <span class="client-icon">📱</span>
+      <div class="client-label">Instagram Pages</div>
+      <div class="client-sub">Scaling reach and engagement</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-inner">
+    <span class="section-label" style="color:var(--purple-light)">Let's Connect</span>
+    <h2 class="section-title">Ready to Build Something<br><span class="hl">Unforgettable?</span></h2>
+    <p class="section-sub">Let's create something that people can't ignore — together.</p>
+
+    <div class="contact-cta-text">
+      <span>"Let's create something that people can't ignore"</span>
+    </div>
+
+    <div class="contact-links">
+      <a href="https://www.instagram.com/mohit_7_00_" target="_blank" class="contact-link instagram">
+        📸 @mohit_7_00_
+      </a>
+    </div>
+
+    <div class="contact-divider"></div>
+    <div class="contact-footer">Based in India · Open to Remote Collaborations Worldwide</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  Designed & Built with 💜 by <span>Mohit.M</span> · Content Creator & Digital Strategist
+</footer>
+
+<script>
+  // ── Navbar scroll ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Animate skill bars
+        const bars = e.target.querySelectorAll ? e.target.querySelectorAll('.skill-bar') : [];
+        bars.forEach(bar => { bar.style.width = bar.dataset.width; });
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .exp-item').forEach(el => observer.observe(el));
+
+  // Also observe skill cards for bar animation
+  document.querySelectorAll('.skill-card').forEach(card => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const bar = e.target.querySelector('.skill-bar');
+          if (bar) setTimeout(() => { bar.style.width = bar.dataset.width; }, 200);
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(card);
+  });
+
+  // ── Typing effect ──
+  const phrases = ['Digital Presence', 'Your Brand Story', 'Real Connections', 'Lasting Impact'];
+  let phraseIndex = 0, charIndex = 0, deleting = false;
+  const typedEl = document.getElementById('typed-text');
+
+  function type() {
+    const current = phrases[phraseIndex];
+    if (!deleting) {
+      typedEl.textContent = current.substring(0, ++charIndex);
+      if (charIndex === current.length) { deleting = true; setTimeout(type, 2000); return; }
+    } else {
+      typedEl.textContent = current.substring(0, --charIndex);
+      if (charIndex === 0) { deleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  setTimeout(type, 1500);
+
+  // ── Smooth scroll for nav links ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
